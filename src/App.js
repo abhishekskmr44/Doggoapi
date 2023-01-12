@@ -1,17 +1,23 @@
-import React from 'react'
-import { Route } from 'react-router'
-import DogBreedDetail from './pages/Breedimage'
-import ListAllBreeds from './pages/Breedlist'
-// import LoginSignup from './pages/Signup'
-// import Login from './pages/Signup'
+import React, { useState } from "react";
+import logo from './logo.svg';
+import './App.css';
+import { Login } from "./Login";
+import { Register } from "./Register";
 
-const App = () => {
+function App() {
+  const [currentForm, setCurrentForm] = useState('login');
+
+  const toggleForm = (formName) => {
+    setCurrentForm(formName);
+  }
+
   return (
-    <div>
-      <Route path="/" exact component={ListAllBreeds} />
-      <Route path="/breeds/:breed" component={DogBreedDetail} />
+    <div className="App">
+      {
+        currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm} />
+      }
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
